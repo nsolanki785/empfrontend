@@ -63,7 +63,7 @@ const AdminList = () => {
             isValid = false;
         }
     
-        if (!passwordRegex.test(signUpdata.password)) {
+        if (modalTitle == "Add" && !passwordRegex.test(signUpdata.password)) {
             errors['password'] = 'Invalid password'
             isValid = false;
         }
@@ -80,12 +80,12 @@ const AdminList = () => {
 
         
 
-        if (!signUpdata.confirmpassword) {
+        if (modalTitle == "Add" && !signUpdata.confirmpassword) {
             errors['confirmpassword'] = 'Please enter confirm password '
             isValid = false;
         }
 
-        if (signUpdata.password != signUpdata.confirmpassword) {
+        if (modalTitle == "Add" && signUpdata.password != signUpdata.confirmpassword) {
             errors['confirmpassword'] = 'password and confirm password should be some'
             isValid =false;
         }
@@ -102,12 +102,14 @@ const AdminList = () => {
 
     const handleClose = () => {
         setShowModal(false);
-        setFormErrors({})
+        setFormErrors({});
+        setsignUpdata({});
     }
 
     const handleOpenModal = () => {
         setModaltitle("Add");
         setShowModal(true)
+        setsignUpdata({});
     }
 
     const handleSubmit = async (e) => {
@@ -261,6 +263,7 @@ const AdminList = () => {
                             </span>
                             }
                         </div>
+                        {modalTitle == "Add" &&
                 <div className="">
                     <label for="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                     >Password</label>
@@ -284,10 +287,12 @@ const AdminList = () => {
                     </span>
                     }
                 </div>
+                        }
             
 
             
                 </div>
+                {modalTitle == "Add" &&
                 <div className="grid grid-cols-2 gap-4 ">
                 <div className="">
                     <label for="c_password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
@@ -313,6 +318,7 @@ const AdminList = () => {
                     }
                 </div>
                 </div>
+                }
                 <div>
             
                 </div>

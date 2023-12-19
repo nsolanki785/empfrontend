@@ -85,7 +85,7 @@ const EmployeeList = () => {
             isValid = false;
         }
     
-        if (!passwordRegex.test(signUpdata.password)) {
+        if (modalTitle == "Add" && !passwordRegex.test(signUpdata.password)) {
             errors['password'] = 'Invalid password'
             isValid = false;
         }
@@ -102,16 +102,15 @@ const EmployeeList = () => {
 
         
 
-        if (!signUpdata.confirmpassword) {
+        if (modalTitle == "Add" && !signUpdata.confirmpassword) {
             errors['confirmpassword'] = 'Please enter confirm password '
             isValid = false;
         }
 
-        if (signUpdata.password != signUpdata.confirmpassword) {
+        if (modalTitle == "Add" && signUpdata.password != signUpdata.confirmpassword) {
             errors['confirmpassword'] = 'password and confirm password should be some'
             isValid =false;
         }
-
         setFormErrors(errors)
         return isValid;
     }
@@ -130,6 +129,7 @@ const EmployeeList = () => {
     const handleOpenModal = () => {
         setModaltitle("Add");
         setShowModal(true)
+        setsignUpdata({});
     }
 
     const handleSubmit = async (e) => {
@@ -277,7 +277,8 @@ const EmployeeList = () => {
                             </span>
                             }
                         </div>
-                <div className="">
+                        {modalTitle == "Add" &&
+                          <div className="">
                     <label for="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                     >Password</label>
                     <input 
@@ -299,11 +300,13 @@ const EmployeeList = () => {
                             {formErrors.password}
                     </span>
                     }
-                </div>
+                          </div>
+                        }
             
 
             
                 </div>
+                {modalTitle == "Add" &&
                 <div className="grid grid-cols-2 gap-4 ">
                 <div className="">
                     <label for="c_password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
@@ -329,8 +332,8 @@ const EmployeeList = () => {
                     }
                 </div>
                 </div>
+                }
                 <div>
-            
                 </div>
                 </form>
                 </Modal>
